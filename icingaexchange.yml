@@ -1,0 +1,17 @@
+name: check-grafana
+description: "file:///README.rst"
+url: "https://github.com/daq-tools/monitoring-check-grafana"
+tags: HTTP, Grafana, Datasource
+vendor: Linux
+target: Database
+type: Plugin
+license: AGPL
+releases:
+  -
+    name: 0.1.0
+    description: "Release 0.1.0"
+    files:
+      -
+        name: check-grafana-datasource
+        url: "file:///check-grafana-datasource.sh"
+        description: "First release"
