@@ -1,13 +1,12 @@
-###############################
-monitoring-check-grafana README
-###############################
+########################
+monitoring-check-grafana
+########################
 
 
 *****
 About
 *****
-This is a monitoring sensor for checking a
-Grafana datasource against data becoming stale.
+A monitoring sensor for checking a Grafana datasource against data becoming stale.
 
 
 *****
@@ -18,19 +17,19 @@ Plugin environment
 ==================
 ::
 
-    mkdir -p /usr/local/lib/nagios/plugins
+    mkdir -p /usr/local/lib/icinga2/plugins
 
-/etc/icinga2/constants.conf::
+Edit ``/etc/icinga2/constants.conf``::
 
-    const PluginContribDir = "/usr/local/lib/nagios/plugins"
+    const PluginContribDir = "/usr/local/lib/icinga2/plugins"
 
 Install plugin
 ==============
 ::
 
     git clone https://github.com/daq-tools/monitoring-check-grafana /opt/monitoring-check-grafana
-    ln -sr /opt/monitoring-check-grafana/check-grafana-datasource-stale.sh /usr/local/lib/nagios/plugins/check-grafana-datasource-stale
-    ln -sr /opt/monitoring-check-grafana/icinga-command-check-grafana.conf /etc/icinga2/conf.d/command-check-grafana.conf
+    ln -s /opt/monitoring-check-grafana/check-grafana-datasource-stale.sh /usr/local/lib/icinga2/plugins/check-grafana-datasource-stale
+    ln -s /opt/monitoring-check-grafana/icinga-command-check-grafana.conf /etc/icinga2/conf.d/command-check-grafana.conf
 
 
 *************
@@ -38,7 +37,7 @@ Configuration
 *************
 Please have look at the configuration blueprint `icinga-service-check-grafana.example.conf`__.
 
-.. _icinga-service-check-grafana.example.conf:
+.. _icinga-service-check-grafana.example.conf: https://github.com/daq-tools/monitoring-check-grafana/blob/master/icinga-service-check-grafana.example.conf
 
 
 *****
