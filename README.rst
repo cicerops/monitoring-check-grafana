@@ -35,7 +35,27 @@ Install plugin
 *************
 Configuration
 *************
-Please have look at the configuration blueprint `icinga-service-check-grafana.example.conf`__.
+
+Icinga
+======
+A blueprint for a usual configuration in Icinga2::
+
+    object Service "Grafana datasource freshness for testdrive:temperature" {
+      import "generic-service"
+      check_command         = "check-grafana-datasource-stale"
+
+      host_name             = "datahub.example.org"
+      vars.sla              = "24x7"
+
+      vars.grafana_uri      = "https://datahub.example.org/grafana/api/datasources/proxy/42/query"
+      vars.grafana_database = "testdrive"
+      vars.grafana_table    = "temperature"
+      vars.grafana_warning  = "1h"
+      vars.grafana_critical = "12h"
+    }
+
+
+See also `icinga-service-check-grafana.example.conf`_.
 
 .. _icinga-service-check-grafana.example.conf: https://github.com/daq-tools/monitoring-check-grafana/blob/master/icinga-service-check-grafana.example.conf
 
