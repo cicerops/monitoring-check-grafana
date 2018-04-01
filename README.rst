@@ -1,9 +1,9 @@
 .. image:: https://img.shields.io/github/tag/daq-tools/monitoring-check-grafana.svg
     :target: https://github.com/daq-tools/monitoring-check-grafana
-
 .. image:: https://img.shields.io/badge/monitoring%20platform-Icinga2-green.svg
-
+    :target: https://www.icinga.com/
 .. image:: https://img.shields.io/badge/os%20platform-Linux%20%7C%20OS%20X-blue.svg
+    :target: #
 
 |
 
@@ -124,17 +124,25 @@ The luftdaten.info feed triggered a data loss warning
 
 .. image:: https://raw.githubusercontent.com/daq-tools/monitoring-check-grafana/master/screenshot-datasource-stale.jpg
 
-when the people behind had to perform some maintenance work on the database
+when the people operating the platform had to perform some maintenance work on the database
 
 .. raw:: html
 
-    <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">If someone is wondering: The API is down for maintenance. Today we received value no. ‘2^31+1’ . But the database was defined with a maximum of 2^31 values. We are currently changing this to 2^63. But this may need some time.</p>&mdash; OK Lab Stuttgart (@codeforS) <a href="https://twitter.com/codeforS/status/980017103976763392?ref_src=twsrc%5Etfw">March 31, 2018</a></blockquote>
+    <blockquote class="twitter-tweet" data-lang="en">
+        <p lang="en" dir="ltr">
+            If someone is wondering: The API is down for maintenance. Today we received
+            value no. ‘2^31+1’ . But the database was defined with a maximum of 2^31 values.
+            We are currently changing this to 2^63. But this may need some time.
+        </p>
+        &mdash; OK Lab Stuttgart (@codeforS)
+        <a href="https://twitter.com/codeforS/status/980017103976763392">March 31, 2018</a>
+    </blockquote>
     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
-*******************
-Setup prerequisites
-*******************
+*********************
+Install prerequisites
+*********************
 This sensor uses the fine programs HTTPie_ and jq_,
 please install them on your system.
 
