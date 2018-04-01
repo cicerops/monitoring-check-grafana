@@ -78,7 +78,7 @@ please install them on your system.
 
 
 Debian
-------
+======
 ::
 
     apt install httpie jq
@@ -88,7 +88,7 @@ Debian
 
 
 Mac OSX
--------
+=======
 ::
 
     brew install httpie jq
