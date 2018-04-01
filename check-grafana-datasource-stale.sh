@@ -17,8 +17,10 @@
 # Fail on first error
 set -e
 
+# Prologue
 PROGRAM=$(basename -s .sh "${0##*/}")
 VERSION=0.1.0
+
 
 version() {
     echo "$PROGRAM $VERSION"
@@ -187,8 +189,8 @@ exitus() {
 # ------
 
 # Write to STDERR
-minfo()  { >&2 echo "$@"; }
-mdebug() { if [[ $verbose ]]; then >&2 echo "$@"; fi; }
+minfo()  { if [[ $verbose ]]; then >&2 echo "INFO:  $@"; fi; }
+mdebug() { if [[ $verbose ]]; then >&2 echo "DEBUG: $@"; fi; }
 
 data_is_stale() {
 
@@ -203,20 +205,20 @@ data_is_stale() {
     age=$4
 
     # Debugging
-    mdebug "Checking $database:$table for data not older than $age"
+    minfo "Checking $database:$table for data not older than $age"
 
     # InfluxDB query, can be adapted to other databases
     query="SELECT * FROM $table WHERE time > now() - $age LIMIT 1"
 
     # Is there any data for the given query?
-    mdebug "Running command: http \"$datasource\" db==\"$database\" q==\"$query\""
+    #mdebug "Running command: http \"$datasource\" db==\"$database\" q==\"$query\""
     is_stale=$(http "$datasource" db=="$database" q=="$query" | jq '.results[0].series == null')
 
     # TODO: Honor error message from Grafana when given database does not exist:
     # { "message": "Datasource is not configured to allow this database" }
 
     # Debugging
-    mdebug "HTTP response 'is_stale': $is_stale"
+    #mdebug "HTTP response 'is_stale': $is_stale"
 
     # Compute the result.
     # A positive outcome means we *have* recent data, so we should respond
@@ -225,12 +227,16 @@ data_is_stale() {
     # where zero (0) is usually used to signal success.
 
     # If data is stale, signal success.
-    if $is_stale == "true"; then
+    if [ "$is_stale" == "true" ]; then
         return 0
 
     # If data is recent, signal failure.
-    else
+    elif [ "$is_stale" == "false" ]; then
         return 1
+
+    else
+        exitus $STATE_UNKNOWN "Sensor failed. The output of the probe '$is_stale' is neither 'true' nor 'false'."
+
     fi
 
 }
@@ -242,15 +248,14 @@ data_is_stale() {
 set_defaults
 parse_arguments "$@"
 
-mdebug "$PROGRAM $VERSION"
+minfo "$PROGRAM $VERSION"
 
-if data_is_stale "$uri" "$database" "$table" "$critical"; then
-    exitus $STATE_CRITICAL "Data in $database:$table is stale for $critical or longer"
-
-elif data_is_stale "$uri" "$database" "$table" "$warning"; then
-    exitus $STATE_WARNING "Data in $database:$table is stale for $warning or longer"
-
-else
+if ! data_is_stale "$uri" "$database" "$table" "$warning"; then
     exitus $STATE_OK "Data in $database:$table is more recent than $warning"
+fi
 
+if ! data_is_stale "$uri" "$database" "$table" "$critical"; then
+    exitus $STATE_WARNING "Data in $database:$table is stale for $warning or longer"
+else
+    exitus $STATE_CRITICAL "Data in $database:$table is stale for $critical or longer"
 fi
