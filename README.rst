@@ -6,7 +6,10 @@ monitoring-check-grafana
 *****
 About
 *****
-A monitoring sensor for checking a Grafana datasource against data becoming stale.
+A monitoring sensor for checking a Grafana datasource
+against data becoming stale. This will let you detect
+data loss or other dropout conditions of feeds into
+your datasources.
 
 
 *****
@@ -65,6 +68,34 @@ Sensor output::
     WARNING - Data in testdrive:temperature is stale for 12h or longer
 
 .. note:: No worries, the first two lines will go to STDERR.
+
+
+*******************
+Setup prerequisites
+*******************
+This sensor uses the fine programs HTTPie_ and jq_,
+please install them on your system.
+
+
+Debian
+------
+::
+
+    apt install httpie jq
+
+    # Optionally
+    pip install httpie
+
+
+Mac OSX
+-------
+::
+
+    brew install httpie jq
+
+
+.. _HTTPie: https://httpie.org/
+.. _jq: https://stedolan.github.io/jq/
 
 
 
