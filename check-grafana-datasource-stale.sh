@@ -203,7 +203,7 @@ data_is_stale() {
     age=$4
 
     # Debugging
-    minfo "Checking $database:$table for data not older than $age"
+    mdebug "Checking $database:$table for data not older than $age"
 
     # InfluxDB query, can be adapted to other databases
     query="SELECT * FROM $table WHERE time > now() - $age LIMIT 1"
@@ -242,7 +242,7 @@ data_is_stale() {
 set_defaults
 parse_arguments "$@"
 
-minfo "$PROGRAM $VERSION"
+mdebug "$PROGRAM $VERSION"
 
 if data_is_stale "$uri" "$database" "$table" "$critical"; then
     exitus $STATE_CRITICAL "Data in $database:$table is stale for $critical or longer"
