@@ -1,17 +1,17 @@
 name: check-grafana
 description: "file:///README.rst"
 url: "https://github.com/daq-tools/monitoring-check-grafana"
-tags: HTTP, Grafana, Datasource
+tags: HTTP, Grafana, Datasource, Database, InfluxDB, stale, freshness
 vendor: Linux
 target: Database
 type: Plugin
 license: AGPL
 releases:
   -
-    name: 0.1.0
-    description: "Release 0.1.0"
+    name: 0.2.0
+    description: "Release 0.2.0"
     files:
       -
         name: check-grafana-datasource
         url: "file:///check-grafana-datasource.sh"
-        description: "First release"
+        description: "Current release"
