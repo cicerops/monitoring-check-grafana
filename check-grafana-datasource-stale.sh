@@ -17,7 +17,7 @@
 # Fail on first error
 set -e
 
-PROGRAM=${0##*/}
+PROGRAM=$(basename -s .sh "${0##*/}")
 VERSION=0.1.0
 
 version() {
@@ -119,6 +119,10 @@ parse_arguments() {
         ;;
         -h|--help)
             fullusage
+            exit
+        ;;
+        -V|--version)
+            version
             exit
         ;;
         --)
@@ -237,6 +241,8 @@ data_is_stale() {
 # ----
 set_defaults
 parse_arguments "$@"
+
+minfo "$PROGRAM $VERSION"
 
 if data_is_stale "$uri" "$database" "$table" "$critical"; then
     exitus $STATE_CRITICAL "Data in $database:$table is stale for $critical or longer"
