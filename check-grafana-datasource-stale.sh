@@ -17,6 +17,9 @@
 # Fail on first error
 set -e
 
+set -o pipefail
+#set -o errtrace
+
 # Prologue
 PROGRAM=$(basename -s .sh "${0##*/}")
 VERSION=0.1.0
@@ -213,6 +216,9 @@ data_is_stale() {
     # Is there any data for the given query?
     #mdebug "Running command: http \"$datasource\" db==\"$database\" q==\"$query\""
     is_stale=$(http "$datasource" db=="$database" q=="$query" | jq '.results[0].series == null')
+    if [ $? != 0 ]; then
+        exitus $STATE_UNKNOWN "Sensor failed. Did you install HTTPie and jq on our system?"
+    fi
 
     # TODO: Honor error message from Grafana when given database does not exist:
     # { "message": "Datasource is not configured to allow this database" }
