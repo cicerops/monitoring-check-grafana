@@ -183,8 +183,8 @@ exitus() {
 # ------
 
 # Write to STDERR
-minfo()  { >&2 echo "INFO:  $@"; }
-mdebug() { if [[ $verbose ]]; then >&2 echo "DEBUG: $@"; fi; }
+minfo()  { >&2 echo "$@"; }
+mdebug() { if [[ $verbose ]]; then >&2 echo "$@"; fi; }
 
 data_is_stale() {
 
@@ -199,7 +199,7 @@ data_is_stale() {
     age=$4
 
     # Debugging
-    minfo "Checking Grafana datasource $database:$table for data more recent than $age"
+    minfo "Checking $database:$table for data not older than $age"
 
     # InfluxDB query, can be adapted to other databases
     query="SELECT * FROM $table WHERE time > now() - $age LIMIT 1"
