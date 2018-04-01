@@ -102,12 +102,12 @@ Example
 *******
 Sensor invocation::
 
-    ./check-grafana-datasource-stale.sh \\
-        --uri https://datahub.example.org/grafana/api/datasources/proxy/42/query \\
-        --database testdrive \\
-        --table temperature \\
-        --warning 12h \\
-        --critical 3d \\
+    ./check-grafana-datasource-stale.sh \
+        --uri https://datahub.example.org/grafana/api/datasources/proxy/42/query \
+        --database testdrive \
+        --table temperature \
+        --warning 12h \
+        --critical 3d \
         --verbose
 
 Sensor output::
@@ -120,7 +120,7 @@ Sensor output::
 **********
 Screenshot
 **********
-The luftdaten.info feed triggered a data loss warning
+Data acquisition from luftdaten.info triggered a data loss warning
 
 .. image:: https://raw.githubusercontent.com/daq-tools/monitoring-check-grafana/master/screenshot-datasource-stale.jpg
 
