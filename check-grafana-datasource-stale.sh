@@ -4,6 +4,8 @@
 # Copyright (c) 2018 Andreas Motl <andreas@getkotori.org>
 # Licensed under the AGPL v3 License
 #
+# Prerequisites: HTTPie, jq
+#
 # Homepage: https://github.com/daq-tools/monitoring-check-grafana
 # Icinga Exchange: TODO
 # Reporting Bugs: https://github.com/daq-tools/monitoring-check-grafana/issues/new
@@ -23,6 +25,9 @@ set -o pipefail
 # Prologue
 PROGRAM=$(basename -s .sh "${0##*/}")
 VERSION=0.2.0
+
+# Disable sensor completely
+#echo "Temporarily disabled due to database migration"; exit 8
 
 
 version() {
@@ -214,7 +219,7 @@ data_is_stale() {
     query="SELECT * FROM $table WHERE time > now() - $age LIMIT 1"
 
     # Is there any data for the given query?
-    #mdebug "Running command: http \"$datasource\" db==\"$database\" q==\"$query\""
+    mdebug "Running command: http \"$datasource\" db==\"$database\" q==\"$query\""
     is_stale=$(http "$datasource" db=="$database" q=="$query" | jq '.results[0].series == null')
     if [ $? != 0 ]; then
         exitus $STATE_UNKNOWN "Sensor failed. Did you install HTTPie and jq on our system?"

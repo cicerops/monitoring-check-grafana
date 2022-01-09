@@ -157,8 +157,8 @@ Debian
     pip install httpie
 
 
-Mac OSX
-=======
+macOS
+=====
 ::
 
     brew install httpie jq
@@ -181,14 +181,14 @@ Plugin environment
 
 Edit ``/etc/icinga2/constants.conf``::
 
-    const PluginContribDir = "/usr/local/lib/icinga2/plugins"
+    const CustomPluginDir = "/opt/monitoring/plugins"
 
 Installation
 ============
 ::
 
     git clone https://github.com/daq-tools/monitoring-check-grafana /opt/monitoring-check-grafana
-    ln -s /opt/monitoring-check-grafana/check-grafana-datasource-stale.sh /usr/local/lib/icinga2/plugins/check-grafana-datasource-stale
+    ln -s /opt/monitoring-check-grafana/check-grafana-datasource-stale.sh /opt/monitoring/plugins/check-grafana-datasource-stale
     ln -s /opt/monitoring-check-grafana/icinga-command-check-grafana.conf /etc/icinga2/conf.d/command-check-grafana.conf
 
 
