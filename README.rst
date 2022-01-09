@@ -122,7 +122,7 @@ Screenshot
 **********
 Data acquisition from luftdaten.info triggered a data loss warning
 
-.. image:: https://raw.githubusercontent.com/daq-tools/monitoring-check-grafana/master/screenshot-datasource-stale.jpg
+.. image:: https://raw.githubusercontent.com/daq-tools/monitoring-check-grafana/main/screenshot-datasource-stale.jpg
 
 when the people operating the platform had to perform some maintenance work on the database
 
@@ -217,7 +217,7 @@ A blueprint for a usual configuration object::
 
 See also `icinga-service-check-grafana.example.conf`_.
 
-.. _icinga-service-check-grafana.example.conf: https://github.com/daq-tools/monitoring-check-grafana/blob/master/icinga-service-check-grafana.example.conf
+.. _icinga-service-check-grafana.example.conf: https://github.com/daq-tools/monitoring-check-grafana/blob/main/icinga-service-check-grafana.example.conf
 
 
 *******************
@@ -239,4 +239,4 @@ License
 =======
 Licensed under the GNU AGPL license. See LICENSE_ file for details.
 
-.. _LICENSE: https://github.com/daq-tools/monitoring-check-grafana/blob/master/LICENSE
+.. _LICENSE: https://github.com/daq-tools/monitoring-check-grafana/blob/main/LICENSE
